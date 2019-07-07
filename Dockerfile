@@ -57,8 +57,6 @@ ENV STACK_ROOT=/opt/stack \
 
 RUN set -ex \
   ; mkdir -p ${STACK_ROOT} && mkdir -p ${HOME}/.cabal \
-#  ; scp up:~/pub/Configuration/stack/config.yaml ${STACK_ROOT}/config.yaml \
-#  ; scp up:~/pub/Configuration/stack/config ${HOME}/.cabal/config \
   ; curl -sSL https://get.haskellstack.org/ | sh \
   ; stack config set system-ghc --global false && stack config set install-ghc --global true  \
   ; stack update && stack setup \
@@ -199,7 +197,6 @@ ENV GOROOT=/opt/go GOPATH=${HOME}/go GO_VERSION=1.12.6
 ENV PATH=${GOPATH}/bin:${GOROOT}/bin:$PATH
 RUN set -ex \
   ; cd /opt \
-  #; ssh up "cat ~/pub/Platform/go${GO_VERSION}.linux-amd64.tar.gz" \
   ; wget -q -O- https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz \
       | tar xzf - \
   ; go get -u github.com/gopherdata/gophernotes \
