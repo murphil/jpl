@@ -193,7 +193,7 @@ RUN set -ex \
 
 
 ### GO
-ENV GOROOT=/opt/go GOPATH=${HOME}/go GO_VERSION=1.12.6
+ENV GOROOT=/opt/go GOPATH=${HOME}/go GO_VERSION=1.12.7
 ENV PATH=${GOPATH}/bin:${GOROOT}/bin:$PATH
 RUN set -ex \
   ; cd /opt \
