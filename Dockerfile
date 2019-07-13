@@ -23,8 +23,8 @@ RUN set -ex \
   ; curl https://sh.rustup.rs -sSf \
     | sh -s -- --default-toolchain stable -y \
   ; rustup component add rls rust-analysis rust-src clippy rustfmt \
-  # gluon_language-server mdbook
-  ; cargo install gluon_repl wasm-pack \
+  # gluon_repl gluon_language-server mdbook
+  ; cargo install wasm-pack \
   ; cargo install evcxr_jupyter \
   ; evcxr_jupyter --install \
   #; cargo install -q iron actix actix-web may reqwest \
@@ -66,7 +66,7 @@ RUN set -ex \
   ; sed -i 's/==.*$//g' requirements.txt \
   ; pip --no-cache-dir install -r requirements.txt \
   ; sed -i "s/^\(resolver:\).*$/\1 ${STACKAGE_VERSION}/g" stack.yaml \
-  ; stack install flow lens \
+  ; stack install \
       hlint hindent highlight ghcid clock hashtables dlist binary store parsers megaparsec Earley \
       optparse-applicative shelly boomerang aeson yaml taggy cassava JuicyPixels diagrams \
       persistent mwc-random shake TCache MonadRandom monad-logger monad-journal \
@@ -78,7 +78,7 @@ RUN set -ex \
       bytestring containers template-haskell time transformers unix alex attoparsec fgl mtl \
       network QuickCheck parallel random call-stack regex-base regex-compat regex-posix syb \
       text hashable unordered-containers vector zlib multipart HTTP fixed html xhtml \
-      transformers-compat network-uri \
+      transformers-compat network-uri flow lens \
   # Disabled for now because gtk2hs-buildtools doesn't work with lts-13 yet
   #; stack install gtk2hs-buildtools \
   ; stack install --fast \
@@ -99,28 +99,28 @@ RUN set -ex \
   ; rm -rf /usr/local/share/.cache/yarn
 
 ### idris
-ENV IDRIS_ROOT=${HOME}/idris
-RUN set -ex \
-  ; mkdir -p ${IDRIS_ROOT} \
-  ; printf "\
-flags: {}\n\
-extra-package-dbs: []\n\
-packages: []\n\
-resolver: ${STACKAGE_VERSION}\n\
-extra-deps:\n\
-  - binary-0.8.7.0\n\
-  - Cabal-2.2.0.1\n\
-  - aeson-1.3.1.1\n\
-  - code-page-0.1.3\n\
-  - containers-0.5.11.0\n\
-  - megaparsec-6.5.0\n\
-  - network-2.7.0.2\n\
-  - zip-archive-0.3.3\n\
-" > ${IDRIS_ROOT}/stack.yaml \
-  ; cd ${IDRIS_ROOT} \
-  ; stack install idris \
-  #; rm -rf ${STACK_ROOT}/global-project/.stack-work/install/x86_64-linux/${STACKAGE_VERSION}/8.6.5/lib/* \
-  ; rm -rf ${STACK_ROOT}/indices/*
+#ENV IDRIS_ROOT=${HOME}/idris
+#RUN set -ex \
+#  ; mkdir -p ${IDRIS_ROOT} \
+#  ; printf "\
+#flags: {}\n\
+#extra-package-dbs: []\n\
+#packages: []\n\
+#resolver: ${STACKAGE_VERSION}\n\
+#extra-deps:\n\
+#  - binary-0.8.7.0\n\
+#  - Cabal-2.2.0.1\n\
+#  - aeson-1.3.1.1\n\
+#  - code-page-0.1.3\n\
+#  - containers-0.5.11.0\n\
+#  - megaparsec-6.5.0\n\
+#  - network-2.7.0.2\n\
+#  - zip-archive-0.3.3\n\
+#" > ${IDRIS_ROOT}/stack.yaml \
+#  ; cd ${IDRIS_ROOT} \
+#  ; stack install idris \
+#  #; rm -rf ${STACK_ROOT}/global-project/.stack-work/install/x86_64-linux/${STACKAGE_VERSION}/8.6.5/lib/* \
+#  ; rm -rf ${STACK_ROOT}/indices/*
 
 
 ### Julia
@@ -241,9 +241,9 @@ RUN set -ex \
 COPY examples/* ./examples/
 
 ### misc
-RUN set -ex \
-  ; stack install flow \
-  ; stack repl
+#RUN set -ex \
+#  ; stack install flow \
+#  ; stack repl
 
 # ENTRYPOINT [ "/usr/bin/tini", "--" ]
 # CMD [ "jupyter", "lab", "--ip", "0.0.0.0"]
