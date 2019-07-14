@@ -53,7 +53,7 @@ RUN set -ex \
 
 ### Haskell
 ENV STACK_ROOT=/opt/stack \
-    STACKAGE_VERSION=lts-13.27
+    STACKAGE_VERSION=lts-13.28
 
 RUN set -ex \
   ; mkdir -p ${STACK_ROOT} && mkdir -p ${HOME}/.cabal \
