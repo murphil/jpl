@@ -66,18 +66,19 @@ RUN set -ex \
   ; sed -i 's/==.*$//g' requirements.txt \
   ; pip --no-cache-dir install -r requirements.txt \
   ; sed -i "s/^\(resolver:\).*$/\1 ${STACKAGE_VERSION}/g" stack.yaml \
+   # parsers boomerang criterion weigh arithmoi syb multipart HTTP html xhtml
   ; stack install \
-      hlint hindent highlight ghcid clock hashtables dlist binary store parsers megaparsec Earley \
-      optparse-applicative shelly boomerang aeson yaml taggy cassava JuicyPixels diagrams \
+      hlint hindent highlight ghcid clock hashtables dlist binary store megaparsec Earley \
+      optparse-applicative shelly aeson yaml taggy cassava JuicyPixels diagrams \
       persistent mwc-random shake TCache MonadRandom monad-logger monad-journal \
       pipes conduit machines mustache cryptonite http-conduit wreq servant scotty wai \
-      websockets warp smallcheck hspec extensible-exceptions criterion weigh deepseq \
-      filepath directory hpc pretty process arithmoi hmatrix linear statistics ad integration \
+      websockets warp smallcheck hspec extensible-exceptions deepseq \
+      filepath directory hpc pretty process hmatrix linear ad integration statistics \
       monad-par async stm classy-prelude reactive-banana uniplate singletons dimensional \
       free extensible-effects freer bound unbound-generics ghc-prim primitive memory array \
       bytestring containers template-haskell time transformers unix alex attoparsec fgl mtl \
-      network QuickCheck parallel random call-stack regex-base regex-compat regex-posix syb \
-      text hashable unordered-containers vector zlib multipart HTTP fixed html xhtml \
+      network QuickCheck parallel random call-stack regex-base regex-compat regex-posix \
+      text hashable unordered-containers vector zlib fixed \
       transformers-compat network-uri flow lens \
   # Disabled for now because gtk2hs-buildtools doesn't work with lts-13 yet
   #; stack install gtk2hs-buildtools \
