@@ -1,4 +1,4 @@
-FROM nnurphy/jpl:haskell
+FROM nnurphy/jpl-haskell
 
 ### GO
 ENV GOROOT=/opt/go GOPATH=${HOME}/go GO_VERSION=1.12.7
