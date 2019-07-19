@@ -1,4 +1,4 @@
-FROM nnurphy/jpl-rust
+FROM nnurphy/jpl:rust
 
 ### Haskell
 ENV STACK_ROOT=/opt/stack \
