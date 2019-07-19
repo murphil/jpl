@@ -1,0 +1,15 @@
+FROM nnurphy/jpl-haskell
+
+### GO
+ENV GOROOT=/opt/go GOPATH=${HOME}/go GO_VERSION=1.12.7
+ENV PATH=${GOPATH}/bin:${GOROOT}/bin:$PATH
+RUN set -ex \
+  ; cd /opt \
+  ; wget -q -O- https://dl.google.com/go/go${GO_VERSION}.linux-amd64.tar.gz \
+      | tar xzf - \
+  ; go get -u github.com/gopherdata/gophernotes \
+  ; mkdir -p ${HOME}/.local/share/jupyter/kernels/gophernotes \
+  ; cp $(go env GOPATH)/src/github.com/gopherdata/gophernotes/kernel/* \
+      ${HOME}/.local/share/jupyter/kernels/gophernotes \
+  ; go get gonum.org/v1/gonum/mat \
+  ; rm -rf $(go env GOCACHE)/*
