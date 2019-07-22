@@ -17,12 +17,13 @@ RUN set -ex \
   ; sed -i "s/^\(resolver:\).*$/\1 ${STACKAGE_VERSION}/g" stack.yaml \
    # parsers boomerang criterion weigh arithmoi syb multipart HTTP html xhtml
   ; stack install \
-      optparse-applicative shelly aeson yaml taggy diagrams \
+      optparse-applicative shelly aeson yaml taggy \
       MonadRandom monad-logger monad-journal \
       pipes conduit machines mustache cryptonite \
       http-conduit wreq servant scotty wai websockets warp \
-      smallcheck hspec extensible-exceptions deepseq \
-      filepath directory pretty process hmatrix linear ad integration statistics \
+      hspec extensible-exceptions deepseq \
+      # hmatrix linear ad integration statistics \
+      filepath directory pretty process \
       monad-par async stm classy-prelude reactive-banana uniplate singletons dimensional \
       free extensible-effects bound unbound-generics ghc-prim primitive memory array \
       bytestring containers template-haskell time transformers unix alex attoparsec fgl mtl \
