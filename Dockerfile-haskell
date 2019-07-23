@@ -19,14 +19,15 @@ RUN set -ex \
   ; stack install \
       optparse-applicative shelly aeson yaml taggy \
       MonadRandom monad-logger monad-journal \
-      pipes conduit machines mustache cryptonite \
+      #  cryptonite
+      pipes conduit machines mustache \
       http-conduit wreq servant scotty wai websockets warp \
       hspec extensible-exceptions deepseq \
       # hmatrix linear ad integration statistics \
-      filepath directory pretty process \
-      monad-par async stm classy-prelude reactive-banana uniplate singletons dimensional \
+      filepath directory pretty process singletons \
+      # monad-par async stm classy-prelude reactive-banana uniplate dimensional alex \
       free extensible-effects bound unbound-generics ghc-prim primitive memory array \
-      bytestring containers template-haskell time transformers unix alex attoparsec fgl mtl \
+      bytestring containers template-haskell time transformers unix attoparsec fgl mtl \
       network QuickCheck parallel random call-stack regex-base regex-compat regex-posix \
       text hashable unordered-containers vector zlib fixed \
       flow lens \
