@@ -1,4 +1,4 @@
-FROM nnurphy/jpl-go
+FROM nnurphy/jpl-haskell
 
 ### iLua
 RUN set -ex \

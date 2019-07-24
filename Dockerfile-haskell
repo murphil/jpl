@@ -1,4 +1,4 @@
-FROM nnurphy/jpl-rust
+FROM nnurphy/jpl-go
 
 ### Haskell
 ENV STACK_ROOT=/opt/stack \
@@ -17,19 +17,24 @@ RUN set -ex \
   ; sed -i "s/^\(resolver:\).*$/\1 ${STACKAGE_VERSION}/g" stack.yaml \
    # parsers boomerang criterion weigh arithmoi syb multipart HTTP html xhtml
   ; stack install \
-      optparse-applicative shelly aeson yaml taggy \
-      MonadRandom monad-logger monad-journal \
-      #  cryptonite
-      pipes conduit machines mustache \
-      http-conduit wreq servant scotty wai websockets warp \
-      hspec extensible-exceptions deepseq \
+      # optparse-applicative taggy
+      shelly aeson yaml \
+      # monad-journal
+      MonadRandom monad-logger \
+      #  cryptonite pipes
+      conduit machines mustache \
+      # wreq scotty wai websockets warp
+      http-conduit servant \
+      # hspec extensible-exceptions deepseq \
       # hmatrix linear ad integration statistics \
       filepath directory pretty process singletons \
       # monad-par async stm classy-prelude reactive-banana uniplate dimensional alex \
-      free extensible-effects bound unbound-generics ghc-prim primitive memory array \
-      bytestring containers template-haskell time transformers unix attoparsec fgl mtl \
+      # bound unbound-generics primitive memory array
+      free extensible-effects ghc-prim \
+      # bytestring containers fgl
+      template-haskell time transformers unix attoparsec mtl \
       network QuickCheck parallel random call-stack regex-base regex-compat regex-posix \
-      text hashable unordered-containers vector zlib fixed \
+      # text hashable unordered-containers vector zlib fixed \
       flow lens \
   # Disabled for now because gtk2hs-buildtools doesn't work with lts-13 yet
   #; stack install gtk2hs-buildtools \
