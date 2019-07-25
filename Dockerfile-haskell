@@ -17,24 +17,24 @@ RUN set -ex \
   ; sed -i "s/^\(resolver:\).*$/\1 ${STACKAGE_VERSION}/g" stack.yaml \
    # parsers boomerang criterion weigh arithmoi syb multipart HTTP html xhtml
   ; stack install \
-      # optparse-applicative taggy
+      optparse-applicative taggy \
       shelly aeson yaml \
-      # monad-journal
+      monad-journal \
       MonadRandom monad-logger \
-      #  cryptonite pipes
+      cryptonite pipes \
       conduit machines mustache \
       # wreq scotty wai websockets warp
       http-conduit servant \
-      # hspec extensible-exceptions deepseq \
-      # hmatrix linear ad integration statistics \
+      hspec extensible-exceptions deepseq \
+      hmatrix linear ad integration statistics \
       filepath directory pretty process singletons \
-      # monad-par async stm classy-prelude reactive-banana uniplate dimensional alex \
+      monad-par async stm classy-prelude reactive-banana uniplate dimensional alex \
       # bound unbound-generics primitive memory array
       free extensible-effects ghc-prim \
-      # bytestring containers fgl
+      bytestring containers fgl memory array \
       template-haskell time transformers unix attoparsec mtl \
       network QuickCheck parallel random call-stack regex-base regex-compat regex-posix \
-      # text hashable unordered-containers vector zlib fixed \
+      text hashable unordered-containers vector zlib fixed \
       flow lens \
   # Disabled for now because gtk2hs-buildtools doesn't work with lts-13 yet
   #; stack install gtk2hs-buildtools \
