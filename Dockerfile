@@ -21,7 +21,7 @@ RUN set -ex \
   #; rm -rf /usr/local/share/.cache/yarn \
   ; stack install flow
 
-COPY assets/examples/* ./examples/
+COPY examples/* ./examples/
 
 ### misc
 #RUN set -ex \
