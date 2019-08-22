@@ -16,9 +16,9 @@ RUN set -ex \
 
 
 RUN set -ex \
-  ; jupyter labextension install ihaskell_labextension \
+  #; jupyter labextension install ihaskell_labextension \
   #; jupyter labextension install ihaskell_jupyterlab \
-  ; rm -rf /usr/local/share/.cache/yarn \
+  #; rm -rf /usr/local/share/.cache/yarn \
   ; stack install flow \
   ; rm -rf ${STACK_ROOT}/pantry/*
 
