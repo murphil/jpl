@@ -14,6 +14,15 @@ RUN set -ex \
   ; python setup.py install_data -d ${HOME}/.local \
   ; rm -rf ${HOME}/ilua/.git
 
+### Julia
+ENV JULIA_HOME=/opt/julia
+ENV PATH=${JULIA_HOME}/bin:$PATH
+RUN set -eux \
+  ; julia_version=$(curl -sSL https://julialang.org/downloads/ | pup '#current_stable_release > a text{}' | awk '{print $4}') \
+  ; julia_version_n=${julia_version:1} julia_version_m=${julia_version_n%.*} \
+  ; curl https://julialang-s3.julialang.org/bin/linux/x64/${julia_version_m}/julia-${julia_version_n}-linux-x86_64.tar.gz \
+    | tar xz -C ${JULIA_HOME} --strip-components 1 \
+  ; julia -e 'using Pkg; Pkg.add("IJulia"); using IJulia'
 
 COPY examples/* ./examples/
 
