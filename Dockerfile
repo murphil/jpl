@@ -18,6 +18,7 @@ RUN set -ex \
 ENV JULIA_HOME=/opt/julia
 ENV PATH=${JULIA_HOME}/bin:$PATH
 RUN set -eux \
+  ; mkdir -p ${JULIA_HOME} \
   ; julia_version=$(curl -sSL https://julialang.org/downloads/ | pup '#current_stable_release > a text{}' | awk '{print $4}') \
   ; julia_version_n=${julia_version:1} julia_version_m=${julia_version_n%.*} \
   ; curl https://julialang-s3.julialang.org/bin/linux/x64/${julia_version_m}/julia-${julia_version_n}-linux-x86_64.tar.gz \
