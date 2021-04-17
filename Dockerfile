@@ -1,4 +1,4 @@
-FROM nashv1/jpl-hs
+FROM fj0rd/jpl:hs
 
 # ### iLua
 # RUN set -ex \
