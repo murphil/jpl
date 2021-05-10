@@ -33,11 +33,7 @@ RUN set -ex \
 #   ; sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < $gophernotes_dir/kernel.json.in > $gophernotes_dir/kernel.json \
 #   ; go get golang.org/x/tools/gopls@latest \
 #   ; rm -rf $(go env GOCACHE)/*
-#
-# RUN set -eux \
-#   ; nvim_home=/etc/skel/.config/nvim \
-#   ; $nvim_home/plugged/vimspector/install_gadget.py --enable-go \
-#   ; rm -f $nvim_home/plugged/vimspector/gadgets/linux/download/*/*/*.vsix
+
 
 ### Racket
 #ENV RACKET_HOME=/opt/racket RACKET_VERSION=7.3
