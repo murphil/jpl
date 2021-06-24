@@ -17,22 +17,22 @@ RUN set -ex \
   ; apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # ### GO
-# ENV GOROOT=/opt/go GOPATH=${HOME}/go
-# ENV PATH=${GOPATH}/bin:${GOROOT}/bin:$PATH
-# ENV GO111MODULE=on
-# RUN set -ex \
-#   ; cd /opt \
-#   ; GO_VERSION=$(curl https://golang.org/VERSION?m=text) \
-#   ; curl -sSL https://dl.google.com/go/${GO_VERSION}.linux-amd64.tar.gz \
-#       | tar xzf - \
-#   ; go get -u github.com/gopherdata/gophernotes \
-#   ; gophernotes_dir=${HOME}/.local/share/jupyter/kernels/gophernotes \
-#   ; mkdir -p $gophernotes_dir \
-#   ; cp "$(go env GOPATH)"/pkg/mod/github.com/gopherdata/gophernotes*/kernel/* $gophernotes_dir \
-#   ; chmod +w $gophernotes_dir/kernel.json \
-#   ; sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < $gophernotes_dir/kernel.json.in > $gophernotes_dir/kernel.json \
-#   ; go get golang.org/x/tools/gopls@latest \
-#   ; rm -rf $(go env GOCACHE)/*
+ENV GOROOT=/opt/go GOPATH=${HOME}/go
+ENV PATH=${GOPATH}/bin:${GOROOT}/bin:$PATH
+ENV GO111MODULE=on
+RUN set -ex \
+  ; cd /opt \
+  ; GO_VERSION=$(curl https://golang.org/VERSION?m=text) \
+  ; curl -sSL https://dl.google.com/go/${GO_VERSION}.linux-amd64.tar.gz \
+      | tar xzf - \
+  ; go get -u github.com/gopherdata/gophernotes \
+  ; gophernotes_dir=${HOME}/.local/share/jupyter/kernels/gophernotes \
+  ; mkdir -p $gophernotes_dir \
+  ; cp "$(go env GOPATH)"/pkg/mod/github.com/gopherdata/gophernotes*/kernel/* $gophernotes_dir \
+  ; chmod +w $gophernotes_dir/kernel.json \
+  ; sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < $gophernotes_dir/kernel.json.in > $gophernotes_dir/kernel.json \
+  ; go get golang.org/x/tools/gopls@latest \
+  ; rm -rf $(go env GOCACHE)/*
 
 
 ### Racket
@@ -40,7 +40,7 @@ ENV RACKET_HOME=/opt/racket
 ENV PATH=${RACKET_HOME}/bin:$PATH
 
 RUN set -eux \
-  ; racket_ver=$(curl -sSL -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/racket/racket/releases | jq -r '[.[]|select(.prerelease==false)][0].tag_name' | cut -c 2-)
+  ; racket_ver=$(curl -sSL -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/racket/racket/releases | jq -r '[.[]|select(.prerelease==false)][0].tag_name' | cut -c 2-) \
   ; racket_url=https://mirror.racket-lang.org/installers/${racket_ver}/racket-${racket_ver}-x86_64-linux-cs.sh \
   ; curl -sSLo racket.sh ${racket_url} \
   ; sh ./racket.sh --in-place --dest ${RACKET_HOME} \
