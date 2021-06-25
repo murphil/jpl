@@ -4,6 +4,8 @@ RUN set -ex \
   ; apt-get update \
   ; apt-get install -y --no-install-recommends \
       cmake build-essential \
+      # racket
+      # libzmq5 \
       # rust
       libzmq3-dev pkg-config libssl-dev \
       # debug
@@ -15,6 +17,22 @@ RUN set -ex \
       # stack
       libicu-dev libffi-dev libgmp-dev zlib1g-dev \
   ; apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
+
+
+### Racket
+ENV RACKET_HOME=/opt/racket
+ENV PATH=${RACKET_HOME}/bin:$PATH
+
+RUN set -eux \
+  ; racket_ver=$(curl -sSL -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/racket/racket/releases | jq -r '[.[]|select(.prerelease==false)][0].tag_name' | cut -c 2-) \
+  ; racket_url=https://mirror.racket-lang.org/installers/${racket_ver}/racket-${racket_ver}-x86_64-linux-cs.sh \
+  ; curl -sSLo racket.sh ${racket_url} \
+  ; sh ./racket.sh --in-place --dest ${RACKET_HOME} \
+  ; rm ./racket.sh \
+  ; raco pkg install --deps search-auto --batch iracket \
+  ; raco iracket install \
+  ; rm -rf ${HOME}/.racket/download-cache
+
 
 # ### GO
 ENV GOROOT=/opt/go GOPATH=${HOME}/go
@@ -33,21 +51,6 @@ RUN set -ex \
   ; sed "s|gophernotes|$(go env GOPATH)/bin/gophernotes|" < $gophernotes_dir/kernel.json.in > $gophernotes_dir/kernel.json \
   ; go get golang.org/x/tools/gopls@latest \
   ; rm -rf $(go env GOCACHE)/*
-
-
-### Racket
-ENV RACKET_HOME=/opt/racket
-ENV PATH=${RACKET_HOME}/bin:$PATH
-
-RUN set -eux \
-  ; racket_ver=$(curl -sSL -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/racket/racket/releases | jq -r '[.[]|select(.prerelease==false)][0].tag_name' | cut -c 2-) \
-  ; racket_url=https://mirror.racket-lang.org/installers/${racket_ver}/racket-${racket_ver}-x86_64-linux-cs.sh \
-  ; curl -sSLo racket.sh ${racket_url} \
-  ; sh ./racket.sh --in-place --dest ${RACKET_HOME} \
-  ; rm ./racket.sh \
-  ; raco pkg install --auto iracket \
-  ; racket -l iracket/install \
-  ; rm -rf ${HOME}/.racket/download-cache
 
 
 ### idris
