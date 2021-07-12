@@ -1,4 +1,5 @@
-FROM fj0rd/jpl:rs
+ARG REPO=fj0rd
+FROM ${REPO}/jpl:rs
 
 ### Haskell
 ENV STACK_ROOT=/opt/stack
