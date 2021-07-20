@@ -1,5 +1,4 @@
-ARG REPO=fj0rd
-FROM ${REPO}/jpl:hs
+FROM fj0rd/jpl:hs
 
 # RUN set -ex \
 #   ; jupyter labextension install jupyterlab-ihaskell \

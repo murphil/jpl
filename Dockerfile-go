@@ -1,5 +1,4 @@
-ARG REPO=fj0rd
-FROM ${REPO}/py:torch
+FROM fj0rd/py:torch
 
 RUN set -ex \
   ; apt-get update \

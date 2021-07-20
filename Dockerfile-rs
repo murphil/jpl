@@ -1,5 +1,4 @@
-ARG REPO=fj0rd
-FROM ${REPO}/jpl:go
+FROM fj0rd/jpl:go
 
 ### Rust
 ENV CARGO_HOME=/opt/cargo RUSTUP_HOME=/opt/rustup
